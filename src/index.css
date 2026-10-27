@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-primary: #f8fafc;
+    --bg-secondary: #f1f5f9;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --glass-bg: rgba(255, 255, 255, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.8);
+    --glass-shadow: rgba(0, 0, 0, 0.08);
+  }
+
+  .dark {
+    --bg-primary: #052e16;
+    --bg-secondary: #14532d;
+    --text-primary: #f0fdf4;
+    --text-secondary: #bbf7d0;
+    --glass-bg: rgba(20, 83, 45, 0.25);
+    --glass-border: rgba(134, 239, 172, 0.15);
+    --glass-shadow: rgba(0, 0, 0, 0.3);
+  }
+
+  * {
+    @apply border-slate-200 dark:border-eco-800;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900 dark:bg-eco-950 dark:text-eco-50;
+    font-feature-settings: 'cv11', 'ss01';
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+
+  ::selection {
+    @apply bg-eco-500/30;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply backdrop-blur-xl border;
+    background: var(--glass-bg);
+    border-color: var(--glass-border);
+    box-shadow: 0 8px 32px var(--glass-shadow);
+  }
+
+  .glass-card {
+    @apply glass rounded-2xl;
+  }
+
+  .glass-input {
+    @apply w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-eco-900/40 border border-slate-200 dark:border-eco-700/50 backdrop-blur-md text-slate-900 dark:text-eco-50 placeholder-slate-400 dark:placeholder-eco-300/50 focus:outline-none focus:ring-2 focus:ring-eco-500/50 focus:border-transparent transition-all duration-200;
+  }
+
+  .btn-primary {
+    @apply px-6 py-3 rounded-xl bg-gradient-to-r from-eco-500 to-eco-600 text-white font-semibold shadow-lg shadow-eco-500/30 hover:shadow-eco-500/50 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 rounded-xl glass font-semibold text-slate-700 dark:text-eco-100 hover:bg-white/70 dark:hover:bg-eco-800/40 transition-all duration-200;
+  }
+
+  .btn-ghost {
+    @apply px-4 py-2 rounded-lg text-slate-600 dark:text-eco-200 hover:bg-slate-100 dark:hover:bg-eco-800/40 transition-all duration-200;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-eco-400 via-eco-500 to-energy-400 bg-clip-text text-transparent;
+  }
+
+  .gradient-border {
+    position: relative;
+    background-clip: padding-box;
+  }
+
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(34,197,94,0.5), rgba(6,182,212,0.3), transparent);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .skeleton {
+    @apply relative overflow-hidden bg-slate-200 dark:bg-eco-800/50 rounded;
+  }
+
+  .skeleton::after {
+    content: '';
+    @apply absolute inset-0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    background-size: 1000px 100%;
+    animation: shimmer 2s linear infinite;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-custom::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    @apply bg-eco-500/30 rounded-full;
+  }
+  .scrollbar-custom::-webkit-scrollbar-thumb:hover {
+    @apply bg-eco-500/50;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
